@@ -1,5 +1,3 @@
-import { url } from "inspector";
-
 export interface WorkItem {
   id: string;
   index: string;
@@ -8,6 +6,7 @@ export interface WorkItem {
   description: string;
   gradient: string;
   image?: string;
+  link?: string;
 }
 
 export const WORK_ITEMS: WorkItem[] = [
