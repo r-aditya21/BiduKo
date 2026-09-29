@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
+import StickerLayer from "./StickerLayer";
 
 // Register GSAP TextPlugin
 gsap.registerPlugin(TextPlugin);
@@ -42,7 +43,9 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
-  // Mouse tracking & hero entrance effects
+  // Mouse tracking
+  // Coordinate readout still follows the mouse,
+  // but NO hover/tracking class is added to the hero.
   useEffect(() => {
     const hero = heroRef.current;
     if (!hero) return;
@@ -64,14 +67,12 @@ export default function Hero() {
         if (!hero) return;
 
         const rect = hero.getBoundingClientRect();
-
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
+        // Keep coordinates for the readout
         hero.style.setProperty("--mx", `${x}px`);
         hero.style.setProperty("--my", `${y}px`);
-
-        hero.classList.add("is-tracking");
 
         const cx = String(Math.max(0, Math.round(x))).padStart(3, "0");
         const cy = String(Math.max(0, Math.round(y))).padStart(3, "0");
@@ -79,20 +80,11 @@ export default function Hero() {
         setCoords(`X ${cx} · Y ${cy}`);
       }
 
-      function onMouseLeave() {
-        if (!hero) return;
-
-        hero.classList.remove("is-tracking");
-      }
-
       hero.addEventListener("mousemove", onMouseMove);
-      hero.addEventListener("mouseleave", onMouseLeave);
 
       return () => {
         clearTimeout(timer);
-
         hero.removeEventListener("mousemove", onMouseMove);
-        hero.removeEventListener("mouseleave", onMouseLeave);
       };
     }
 
@@ -100,7 +92,7 @@ export default function Hero() {
   }, []);
 
   function handleScrollCue() {
-    const marquee = document.querySelector(".marquee");
+    const marquee = document.getElementById("marquee-section");
 
     if (marquee) {
       const prefersReduced = window.matchMedia(
@@ -136,51 +128,61 @@ export default function Hero() {
   }
 
   return (
-    <section className="hero" id="top" ref={heroRef}>
-      {/* Blueprint grid reveal layer */}
+    <section
+      id="top"
+      ref={heroRef}
+      className="hero relative min-h-[100svh] flex flex-col justify-center items-start pt-[140px] max-[860px]:pt-[120px] pb-[100px] px-[clamp(20px,5vw,64px)] overflow-hidden text-left"
+    >
+      {/* Blueprint grid - ALWAYS VISIBLE */}
       <div
         className="hero__blueprint"
         id="blueprint"
         aria-hidden="true"
       ></div>
 
+      {/* Draggable stickers */}
+      <StickerLayer />
+
       {/* Coordinate readout */}
       <div
-        className="hero__coord"
+        className="hero__coord absolute left-[var(--mx,0)] top-[var(--my,0)] translate-x-4 -translate-y-1/2 font-mono text-[11px] tracking-[0.06em] text-signal bg-surface border border-line py-[3px] px-2 rounded-[4px] opacity-0 transition-opacity duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none whitespace-nowrap"
         id="coordReadout"
         aria-hidden="true"
       >
         {coords}
       </div>
 
-      <div className="hero__inner">
-        <p className="eyebrow reveal">
+      {/* Main Content */}
+      <div className="relative z-[2] max-w-[1040px] w-full flex flex-col items-start text-left pl-[15px]">
+        {/* Eyebrow */}
+        <p className="font-mono text-[12.5px] tracking-[0.14em] uppercase text-signal mb-3.5 reveal">
           Digital studio &nbsp;·&nbsp; Design &nbsp;·&nbsp; Development
           &nbsp;·&nbsp; Creative
         </p>
 
-        <h1 className="hero__headline">
-          <span className="reveal-line">
-            <span className="reveal-line__inner">
-              GOOD IDEAS
+        {/* Heading */}
+        <h1 className="font-display text-[clamp(40px,8.6vw,108px)] font-bold leading-[0.98] tracking-[-0.02em] mt-1.5 mb-10 uppercase text-left w-full">
+          {/* First line */}
+          <span className="reveal-line flex justify-start whitespace-nowrap">
+            <span className="reveal-line__inner whitespace-nowrap">
+              GOOD IDEAS DESERVE
             </span>
           </span>
 
-          <span className="reveal-line">
+          {/* Animated second line */}
+          <span className="reveal-line flex justify-start">
             <span className="reveal-line__inner">
-              DESERVE BETTER
-            </span>
-          </span>
+              <span className="inline-flex items-baseline relative w-[9.5em] h-[1.1em] whitespace-nowrap justify-start">
+                <em
+                  ref={textRef}
+                  className="inline-block not-italic text-signal"
+                >
+                  EXECUTION.
+                </em>
 
-          <span className="reveal-line">
-            <span className="reveal-line__inner">
-              {/* Fixed-size animated word container */}
-              <span className="hero__word-slot">
-                <em ref={textRef}>EXECUTION.</em>
-
-                {/* Blinking cursor */}
+                {/* Cursor */}
                 <span
-                  className="hero__cursor"
+                  className="inline-block w-[0.055em] h-[0.82em] bg-signal ml-[0.08em] align-baseline animate-cursor-blink motion-reduce:animate-none motion-reduce:opacity-100"
                   aria-hidden="true"
                 ></span>
               </span>
@@ -188,48 +190,57 @@ export default function Hero() {
           </span>
         </h1>
 
-        <div className="hero__foot reveal">
-          <p className="hero__sub">
+        {/* Description + Buttons */}
+        <div className="max-w-[640px] flex flex-col items-start text-left reveal">
+          <p className="text-[18px] text-ink-soft mb-8 leading-[1.6]">
             BiduKo is a digital studio for founders, brands and teams
             who&apos;d rather ship something great than talk about it.
             We design it, build it, and wire it up to run itself.
           </p>
 
-          <div className="hero__ctas">
+          <div className="flex justify-start gap-3.5 flex-wrap max-[560px]:flex-col max-[560px]:items-stretch w-full">
+            {/* Start Project */}
             <a
               href="#contact"
-              className="btn btn--primary"
+              className="inline-flex items-center justify-center gap-2 font-body font-semibold text-[15px] px-[26px] py-[13px] rounded-full border-[1.5px] border-transparent whitespace-nowrap transition-all duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)] bg-panel text-panel-text hover:bg-signal hover:-translate-y-0.5 group"
               onClick={handleLink}
             >
               Start a Project
             </a>
 
+            {/* View Work */}
             <a
               href="#work"
-              className="btn btn--ghost"
+              className="inline-flex items-center justify-center gap-2 font-body font-semibold text-[15px] px-[26px] py-[13px] rounded-full border-[1.5px] border-line whitespace-nowrap transition-all duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)] bg-transparent text-ink hover:border-ink hover:-translate-y-0.5 group"
               onClick={handleLink}
             >
-              View Our Work <span className="arrow">→</span>
+              View Our Work{" "}
+              <span className="inline-block transition-transform duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1">
+                →
+              </span>
             </a>
           </div>
         </div>
       </div>
 
       {/* Mascot slot */}
+      {/* 
       <div
-        className="mascot-slot mascot-slot--hero"
+        className="mascot-slot absolute right-[clamp(16px,6vw,90px)] bottom-[8%] w-[260px] h-[260px] max-[1100px]:hidden"
         aria-hidden="true"
       ></div>
+      */}
 
       {/* Scroll cue */}
       <button
-        className="hero__scroll-cue"
+        className="absolute bottom-9 left-[clamp(20px,5vw,64px)] bg-transparent border-0 flex flex-col items-center gap-2 font-mono text-[11px] tracking-[0.1em] uppercase text-ink-soft cursor-pointer p-0"
         id="scrollCue"
         aria-label="Scroll to marquee"
         onClick={handleScrollCue}
       >
         <span>Scroll</span>
-        <span className="hero__scroll-line"></span>
+
+        <span className="w-[1px] h-[34px] bg-line relative overflow-hidden after:content-[''] after:absolute after:top-[-100%] after:left-0 after:right-0 after:h-full after:bg-signal after:animate-scroll-line"></span>
       </button>
     </section>
   );

@@ -35,7 +35,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <a href="#main" className="skip-link">
+        <a
+          href="#main"
+          className="absolute left-[-9999px] top-0 bg-panel text-panel-text px-[18px] py-3 z-[999] rounded-br-[8px] focus:left-0"
+        >
           Skip to content
         </a>
         <ThemeProvider>{children}</ThemeProvider>

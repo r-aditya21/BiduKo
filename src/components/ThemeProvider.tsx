@@ -16,7 +16,15 @@ const ThemeContext = createContext<ThemeContextValue>({
 const THEME_KEY = "biduko-theme";
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const stored = localStorage.getItem(THEME_KEY);
+        if (stored === "dark" || stored === "light") return stored;
+      } catch {}
+    }
+    return "light";
+  });
 
   useEffect(() => {
     let stored: string | null = null;
@@ -26,7 +34,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     const targetTheme: Theme = stored === "dark" ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", targetTheme);
-    setTheme(targetTheme);
   }, []);
 
   const applyTheme = useCallback((t: Theme, persist: boolean) => {

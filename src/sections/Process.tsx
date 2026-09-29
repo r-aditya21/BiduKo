@@ -33,25 +33,37 @@ export default function Process() {
   }, []);
 
   return (
-    <section className="process" id="process">
-      <div className="section-head reveal">
-        <p className="eyebrow">How It Works</p>
-        <h2 className="section-title">
-          Five steps. <em>No surprises.</em>
+    <section id="process" className="py-[clamp(64px,10vw,140px)]">
+      <div className="max-w-[720px] px-[clamp(20px,5vw,64px)] mx-auto mb-[clamp(40px,6vw,72px)] reveal">
+        <p className="font-mono text-[12.5px] tracking-[0.14em] uppercase text-signal mb-3.5">
+          How It Works
+        </p>
+        <h2 className="font-display text-[clamp(32px,4.4vw,54px)] font-semibold leading-[1.08] tracking-[-0.01em]">
+          Five steps. <em className="not-italic text-ink-soft">No surprises.</em>
         </h2>
       </div>
 
-      <div className="process__list" ref={listRef}>
-        <div className="process__line" aria-hidden="true">
-          <div className="process__line-fill" id="processFill" ref={fillRef}></div>
+      <div className="max-w-[760px] mx-auto px-[clamp(20px,5vw,64px)] relative" ref={listRef}>
+        {/* Vertical timeline line */}
+        <div
+          className="absolute left-[calc(clamp(20px,5vw,64px)+27px)] top-3 bottom-3 w-[2px] bg-line"
+          aria-hidden="true"
+        >
+          <div
+            id="processFill"
+            ref={fillRef}
+            className="w-full h-0 bg-signal transition-[height] duration-200 ease-linear"
+          ></div>
         </div>
 
         {PROCESS_STEPS.map((step) => (
-          <div key={step.index} className="process-step reveal">
-            <span className="process-step__num">{step.index}</span>
+          <div key={step.index} className="flex gap-7 items-start py-[26px] relative reveal">
+            <span className="font-mono text-[15px] text-panel-text bg-panel w-14 h-14 min-w-14 rounded-full flex items-center justify-center z-[1] shrink-0">
+              {step.index}
+            </span>
             <div>
-              <h3 className="process-step__title">{step.title}</h3>
-              <p className="process-step__desc">{step.description}</p>
+              <h3 className="font-display text-[24px] font-semibold mb-1.5">{step.title}</h3>
+              <p className="text-[15px] text-ink-soft max-w-[48ch]">{step.description}</p>
             </div>
           </div>
         ))}

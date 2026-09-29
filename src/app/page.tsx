@@ -11,6 +11,7 @@ import Marquee from "@/sections/Marquee";
 import SelectedWork from "@/sections/SelectedWork";
 import Services from "@/sections/Services";
 import About from "@/sections/About";
+import Stats from "@/sections/Stats";
 import Process from "@/sections/Process";
 import WhyBiduKo from "@/sections/WhyBiduKo";
 import CtaSection from "@/sections/CtaSection";
@@ -39,6 +40,7 @@ export default function HomePage() {
         <Services />
         <SelectedWork />
         <About />
+        <Stats/>
         <Process />
         <WhyBiduKo />
         <CtaSection />

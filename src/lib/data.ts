@@ -1,3 +1,5 @@
+import { url } from "inspector";
+
 export interface WorkItem {
   id: string;
   index: string;
@@ -10,9 +12,11 @@ export interface WorkItem {
 
 export const WORK_ITEMS: WorkItem[] = [
   {
-    id: "continuum",
+    id: "Trisha Enterprises",
+    image: "/images/projects/trisha.png",
     index: "01",
-    name: "Continuum",
+    link: "https://trisha-enterprises-omega.vercel.app/",
+    name: "Trisha Enterprises",
     category: "Brand Experience / Web Design — 2026",
     description: "A full identity and site rebuild for a fintech startup going from pitch deck to public launch.",
     gradient: "linear-gradient(135deg, #DCE4FF, #EEF0F2)",
@@ -40,22 +44,6 @@ export const WORK_ITEMS: WorkItem[] = [
     category: "AI Product / Web Development — 2026",
     description: "Dashboard and marketing site for an AI forecasting tool used by retail buyers.",
     gradient: "linear-gradient(135deg, #D8F5E8, #EEF0F2)",
-  },
-  {
-    id: "northline",
-    index: "05",
-    name: "Northline",
-    category: "E-commerce / Brand & Dev — 2025",
-    description: "Store, packaging system and email flows for a direct-to-consumer outerwear label.",
-    gradient: "linear-gradient(135deg, #FFE9B8, #EEF0F2)",
-  },
-  {
-    id: "aperture",
-    index: "06",
-    name: "Aperture",
-    category: "Creative Studio / Web Design — 2024",
-    description: "Portfolio and booking system for a three-person photography collective.",
-    gradient: "linear-gradient(135deg, #FFD9E8, #EEF0F2)",
   },
 ];
 

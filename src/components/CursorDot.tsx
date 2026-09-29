@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { useEffect, useRef } from "react";
 
 export default function CursorDot() {
@@ -45,7 +45,7 @@ export default function CursorDot() {
       dot!.style.height = "10px";
       dot!.style.background = "var(--c-signal)";
     }
-    const interactives = document.querySelectorAll("a, button, .service-row");
+    const interactives = document.querySelectorAll("a, button, [role='button']");
     interactives.forEach((el) => {
       el.addEventListener("mouseenter", onEnterInteractive);
       el.addEventListener("mouseleave", onLeaveInteractive);

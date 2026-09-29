@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghumi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="phone">
+
+        <!-- ================= MAP ================= -->
+
+        <main class="map">
+
+            <!-- Temporary map background -->
+            <div class="map-grid"></div>
+
+            <!-- Map markers -->
+            <div class="marker marker-1">☕</div>
+            <div class="marker marker-2">🎵</div>
+            <div class="marker marker-3">🎮</div>
+            <div class="marker marker-4">🌅</div>
+
+            <!-- Current location -->
+            <div class="location">
+                <div class="location-pulse"></div>
+                <div class="location-dot"></div>
+            </div>
+
+            <!-- Top logo -->
+            <div class="logo">
+                ghumi
+            </div>
+
+        </main>
+
+
+        <!-- ================= BOTTOM SHEET ================= -->
+
+        <section class="bottom-sheet">
+
+            <!-- Drag handle -->
+            <div class="drag-area">
+                <div class="drag-handle"></div>
+            </div>
+
+
+            <!-- Sheet Header -->
+            <div class="sheet-header">
+
+                <div>
+                    <p class="eyebrow">NEAR YOU</p>
+                    <h1>What's happening?</h1>
+                </div>
+
+                <button class="location-button">
+                    ◎
+                </button>
+
+            </div>
+
+
+            <!-- Quick categories -->
+
+            <div class="categories">
+
+                <button class="category active">
+                    <span>🔥</span>
+                    Trending
+                </button>
+
+                <button class="category">
+                    <span>☕</span>
+                    Cafés
+                </button>
+
+                <button class="category">
+                    <span>🎵</span>
+                    Events
+                </button>
+
+                <button class="category">
+                    <span>🎮</span>
+                    Activities
+                </button>
+
+            </div>
+
+
+            <!-- ================= EVENTS ================= -->
+
+            <div class="section">
+
+                <div class="section-heading">
+                    <h2>Happening nearby</h2>
+                    <button>See all</button>
+                </div>
+
+
+                <div class="event-card">
+
+                    <div class="event-image">
+                        🎵
+                    </div>
+
+                    <div class="event-content">
+
+                        <span class="event-tag">
+                            TONIGHT
+                        </span>
+
+                        <h3>Live Music Night</h3>
+
+                        <p>
+                            📍 1.2 km away
+                        </p>
+
+                        <div class="event-bottom">
+                            <span>👥 12 people going</span>
+                            <span>₹250</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="event-card">
+
+                    <div class="event-image">
+                        🌅
+                    </div>
+
+                    <div class="event-content">
+
+                        <span class="event-tag">
+                            TOMORROW
+                        </span>
+
+                        <h3>Sunset Walk</h3>
+
+                        <p>
+                            📍 2.4 km away
+                        </p>
+
+                        <div class="event-bottom">
+                            <span>👥 5 people going</span>
+                            <span>FREE</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= PEOPLE ================= -->
+
+            <div class="section people-section">
+
+                <div class="section-heading">
+
+                    <h2>People are looking for</h2>
+
+                    <button>
+                        See all
+                    </button>
+
+                </div>
+
+
+                <div class="request-card">
+
+                    <div class="avatar">
+                        A
+                    </div>
+
+                    <div class="request-content">
+
+                        <h3>Anyone up for coffee?</h3>
+
+                        <p>
+                            Aarav • 20 • 0.8 km
+                        </p>
+
+                    </div>
+
+                    <button class="join-button">
+                        Join
+                    </button>
+
+                </div>
+
+
+                <div class="request-card">
+
+                    <div class="avatar">
+                        R
+                    </div>
+
+                    <div class="request-content">
+
+                        <h3>Exploring the city</h3>
+
+                        <p>
+                            Riya • 21 • 1.4 km
+                        </p>
+
+                    </div>
+
+                    <button class="join-button">
+                        Join
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= NAVIGATION ================= -->
+
+        <nav class="navbar">
+
+            <button class="nav-item active">
+                <span>⌂</span>
+                <small>Home</small>
+            </button>
+
+            <button class="nav-item">
+                <span>⌕</span>
+                <small>Explore</small>
+            </button>
+
+            <button class="create-button">
+                +
+            </button>
+
+            <button class="nav-item">
+                <span>♧</span>
+                <small>Ghumi</small>
+            </button>
+
+            <button class="nav-item">
+                <span>◯</span>
+                <small>Profile</small>
+            </button>
+
+        </nav>
+
+    </div>
+
+    <script src="scripit.js"></script>
+</body>
+</html>
